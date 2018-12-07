@@ -1,3 +1,6 @@
+const jwt = require('jsonwebtoken');
+const config = require('../config/config')
+
 const controller = {}
 
 controller.obtenerUsuarioFinal = (req, res) => {
@@ -9,11 +12,16 @@ controller.obtenerUsuarioFinal = (req, res) => {
             if(!err){
 
                 if (usuarios!=0) {
-                    // res.status(200).json(usuarios);                    
+                    // res.status(200).json(usuarios);                          
+                    var token = jwt.sign({ subid: usuarios[0].idusuario }, config.secretWord, {
+                        expiresIn: '365d' // expires in 1year
+                      });
+
                     res.setHeader('Content-Type', 'application/json');
                     res.status(200).json({                        
                         "mensaje": "ok",
-                        "data" : usuarios[0]
+                        "data" : usuarios[0],
+                        "token" : token
                       });
                    
                   }else{
