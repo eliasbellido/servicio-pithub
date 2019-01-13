@@ -12,12 +12,12 @@ const restaurantRoutes = require('./routes/restaurant')
 
 app.use(morgan('combined'))
 app.use(bodyparser.json())
-// app.use(bodyparser.urlencoded({ extended: true }))
+app.use(bodyparser.urlencoded({ extended: false }))
 app.use(emyconnection(mysql, {
-  host: 'localhost',
-  user: 'root',
-  password: 'admin@bellido',
-  database: 'restauranteBD'
+  host: config.host,
+  user: config.user,
+  password: config.password,
+  database: config.database
 }, 'single'))
 
 app.use(cors())
@@ -27,7 +27,7 @@ app.use('/api/rest', restaurantRoutes)
 
 app.listen(config.port, err => {
   if (!err) {
-    console.log(`Server iniciado en el puerto ${config.port}`)
+    console.log(`Server iniciado en el puerto ${config.host}, ${config.user}, ${config.database}`)
   } else {
     console.log('Error en conectar al puerto')
   }

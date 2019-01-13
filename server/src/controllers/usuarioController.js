@@ -34,4 +34,25 @@ controller.obtenerUsuarioFinal = (req, res) => {
     })
 }
 
+
+controller.registrarNuevoUsuarioFinal = (req,res) => {
+    const {email, clave} = req.body
+    req.getConnection((err,conn) => {
+
+        conn.query('INSERT INTO usuario (email,clave,idtipo_usuario) values (?,?,3)', [email,clave], (err, results) => {
+
+            if(!err){
+                res.status(200).json({
+                    mensaje : "ok",
+                    data : {
+                        idusuario : results.insertId}
+
+                })
+            }else{
+                res.status(500).json({mensaje:' Error al conectarse al server -> ' + err})
+            }
+        })
+    })
+}
+
 module.exports = controller

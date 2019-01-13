@@ -25,7 +25,7 @@ router.get('/producto/:id', auth.authWithToken, productoController.obtenerProduc
 /*router.route('/categorias')
 .get(middleware.verificaToken,categoriaController.Listar)*/
 router.route('/categorias')
-.get(auth.authWithToken, auth.authWithToken, categoriaController.listarCategorias);
+.get(auth.authWithToken, categoriaController.listarCategorias);
 
 //para el login
 router.post('/usuario/validarUsuario', usuarioController.obtenerUsuarioFinal);
