@@ -28,7 +28,8 @@ app.use('/api/rest', restaurantRoutes)
 
 app.listen(config.port, err => {
   if (!err) {
-    console.log(`Server iniciado en el puerto ${config.host}, ${config.user}, ${config.database}`)
+    console.log(`Server iniciado en el puerto ${config.port}`)
+    console.log(`bd server connection with credentials -> ${config.host}, ${config.user}, ${config.database}, ${config.password}`)
   } else {
     console.log('Error en conectar al puerto')
   }
